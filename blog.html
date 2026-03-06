@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+    </style>
+    <link rel="stylesheet" href="CSS/responsividade.css">
+    <link rel="stylesheet" href="CSS/style.css">
+
+    <style>
+        /* Estilos específicos para a página de blog individual */
+
+        :root {
+    --rosa-chiclete-suave: #D9AFC3;
+    --rosa-doce-amora: #D88BAF;
+    --branco-cetim: #FFF9FF;
+    --vinho-intenso: #911A48;
+}
+
+
+.blog-post {
+    max-width: 900px;
+    margin: 150px auto 80px auto;
+    padding: 0 20px;
+    color: var(--vinho-intenso);
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.blog-title {
+    font-family: 'The Seasons', serif;
+    font-size: 2.5rem;
+    color: var(--vinho-intenso);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.blog-date {
+    font-style: italic;
+    color: var(--rosa-doce-amora);
+    font-size: 1rem;
+}
+
+.blog-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(145, 26, 72, 0.2);
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.blog-content h2 {
+    font-family: 'The Seasons', serif;
+    color: var(--vinho-intenso);
+    margin: 40px 0 20px 0;
+    font-size: 1.8rem;
+}
+
+.blog-content h3 {
+    font-family: 'The Seasons', serif;
+    color: var(--rosa-vibrante);
+    margin: 30px 0 15px 0;
+    font-size: 1.5rem;
+}
+
+.blog-content ul {
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+.blog-content li {
+    margin-bottom: 10px;
+}
+
+.blog-tips {
+    background-color: var(--rosa-chiclete-suave);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+    border-left: 5px solid var(--vinho-intenso);
+}
+
+.blog-tips h3 {
+    color: var(--vinho-intenso);
+    margin-top: 0 !important;
+}
+
+.back-to-blog {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 50px;
+    padding: 10px 20px;
+    background-color: var(--vinho-intenso);
+    color: var(--branco-cetim);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-blog:hover {
+    background-color: var(--rosa-vibrante);
+    color: var(--branco-cetim);
+    text-decoration: none;
+}
+
+.blog-post{
+    padding-top: 210px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .blog-post {
+        margin-top: 120px;
+    }
+    
+    .blog-title {
+        font-size: 2rem;
+    }
+    
+    .blog-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .blog-content h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-title {
+        font-size: 1.7rem;
+    }
+    
+    .blog-content {
+        font-size: 1rem;
+    }
+}
+    </style>
+    
+
+</head>
+<body>
+     <header id="cabecalho">
+        <section class="cabecalhoContainer">
+            <a href="index.html"><img src="Imagens/Logo Branca.png" class="logo" alt="Logo Branca"></a>
+            <form class="pesquisar" role="search">
+                <input class="barraPesquisa" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="botaoPesquisar" type="submit">Pesquisar</button>
+            </form>
+            <a href="usuario.html" class="pessoa d-none d-lg-block" style="position: relative; display: inline-block;">
+                <!-- Ícone normal -->
+                <svg class="icone-normal" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1
+                    1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168
+                    1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+
+                <!-- Ícone hover -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill icone-hover" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                </svg>
+            </a>
+
+
+        </section>
+        <hr>
+        <button class="menu-toggle d-block d-lg-none" onclick="toggleMenu()">☰</button>
+        <ul id="topoHeader">
+            <li>
+                <a href="index.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+                    </svg>
+                    <h4>Início</h4>
+                </a>
+            </li>
+            <li>
+                <a href="faq.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                    </svg>
+                    <h4>FAQ</h4>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+     <main>
+        <div class="blog-post">
+            <div class="blog-header" data-aos="fade-up">
+                <h1 class="blog-title">Ideias Criativas de Decoração para Festas Econômicas</h1>
+                <p class="blog-date">Publicado em: 15 de Junho de 2025</p>
+            </div>
+            
+            <img src="Imagens/Blog/1.png" alt="Decoração criativa para festas" class="blog-image" data-aos="fade-up">
+            
+            <div class="blog-content">
+                <p>Organizar uma festa memorável não precisa significar gastar uma fortuna. Com criatividade e planejamento, você pode transformar qualquer espaço em um ambiente encantador sem comprometer seu orçamento. Neste post, compartilhamos algumas das nossas ideias favoritas para decorações de festa econômicas que impressionam.</p>
+                
+                <h2 data-aos="fade-right">1. Reutilize e Recicle</h2>
+                <p>Materiais que você já tem em casa podem ser transformados em peças decorativas incríveis. Garrafas de vidro podem virar vasos charmosos, latas podem se tornar porta-velas românticos e caixas de papelão podem ser a base para placas de sinalização criativas.</p>
+                
+                <div class="blog-tips" data-aos="fade-left">
+                    <h3>Dica Chantilly & Amora:</h3>
+                    <p>Pinte os itens reciclados com cores coordenadas para criar um visual coeso e profissional.</p>
+                </div>
+                
+                <h2 data-aos="fade-right">2. Natureza como Aliada</h2>
+                <p>Elementos naturais como folhas, flores silvestres, galhos e pedras podem ser usados para criar arranjos bonitos e gratuitos. No outono, as folhas secas criam um efeito encantador espalhadas sobre mesas.</p>
+                
+                <h2 data-aos="fade-right">3. Iluminação Criativa</h2>
+                <p>Luzes de LED ou velas (em ambientes seguros) podem transformar completamente um espaço. Cordões de luz são relativamente baratos e podem ser reutilizados em várias ocasiões.</p>
+                
+                <div class="blog-tips" data-aos="fade-left">
+                    <h3>Nosso Segredo:</h3>
+                    <p>Coloque luzes dentro de jarros ou garrafas translúcidas para criar um efeito de luz difusa e romântica.</p>
+                </div>
+                
+                <h2 data-aos="fade-right">4. Faça Você Mesmo</h2>
+                <p>Invista tempo em vez de dinheiro. Convites feitos à mão, bandeirolas de papel, centros de mesa artesanais - esses detalhes personalizados não só economizam dinheiro como também dão um toque especial à sua festa.</p>
+                
+                <h3 data-aos="fade-right">Ideias DIY populares:</h3>
+                <ul data-aos="fade-left">
+                    <li>Pompons de papel crepom</li>
+                    <li>Guirlandas de fotos impressas</li>
+                    <li>Toalhas de mesa pintadas à mão</li>
+                    <li>Marcadores de lugar personalizados</li>
+                </ul>
+                
+                <h2 data-aos="fade-right">5. Foque nos Pontos-Chave</h2>
+                <p>Em vez de tentar decorar todo o espaço, concentre seus esforços e orçamento nas áreas que terão maior impacto visual, como:</p>
+                <ul data-aos="fade-left">
+                    <li>A mesa principal (de doces ou de jantar)</li>
+                    <li>O fundo para fotos</li>
+                    <li>A entrada do local</li>
+                    <li>O centro das mesas</li>
+                </ul>
+                
+                <p>Lembre-se: o mais importante em qualquer festa são as pessoas e os momentos compartilhados. Com essas dicas, você pode criar um ambiente acolhedor e bonito sem estourar seu orçamento.</p>
+                
+                <a href="blog.html" class="back-to-blog" data-aos="fade-up">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                    Voltar para o Blog
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <section class="topoFooter">
+            <section class="chamadaFooter">
+                <img src="Imagens/Logo Branca.png" alt="" style="width: 70%;">
+                <h2>Eventos únicos, memórias eternas.</h2>
+                <p>Chantilly & Amora é especializada em transformar eventos em experiências únicas. Unimos romantismo, sofisticação e personalização para criar celebrações inesquecíveis. Cada detalhe importa — porque cada história é única.</p>
+            </section>
+            <section class="pagamentoSeguranca">
+                <div>
+                    <h3>FORMAS DE PAGAMENTO</h3>
+                    <div>
+                        <img src="https://img.icons8.com/?size=512&id=13608&format=png" alt="" class="imagemFooter" >
+                        <img src="https://images.seeklogo.com/logo-png/50/2/pix-banco-central-brasil-logo-png_seeklogo-500502.png" alt="" class="imagemFooter">
+                    </div>
+                    <div>
+                        <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="" class="imagemFooter">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Elo_card_association_logo_-_black_text.svg/2560px-Elo_card_association_logo_-_black_text.svg.png" alt="" class="imagemFooter">
+                    </div>
+                </div>
+                <div class="seguranca">
+                    <h3>SEGURANÇA</h3>
+                    <div>
+                        <img src="Imagens/C&A ÍCONES (3).png" alt="" style="width: 96%;">
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="menuFooter">
+            <a href="sobre">SOBRE NÓS |</a>
+            <a href="sobre">PORTIFÓLIO |</a>
+            <a href="sobre">SERVIÇOS |</a>
+            <a href="sobre">BLOG |</a>
+            <a href="sobre">ORÇAMENTO |</a>
+            <a href="sobre">CONTATO |</a>
+        </section>
+        <section class="infoFooter">
+            <h6>CHANTILLY & AMORA - DECORAÇÃO DE FESTAS | contato@chantillyeamora.com.br | CNPJ: 35.307.762/0001-10 | 2025</h6>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="javascript/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script type="text/javascript">
+      window.onload = function(){
+      (function(d, script) {
+      script = d.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = 'https://w.app/widget-v1/Y2g5Hp.js';
+      d.getElementsByTagName('head')[0].appendChild(script);
+      }(document));
+      };
+      </script>
+
+      <script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const item = button.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento</title>
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+    </style>
+    <link rel="stylesheet" href="CSS/style.css">
+
+
+    <style>
+        /* Calculadora de Orçamento */
+#orcamento {
+    background-color: var(--branco-cetim);
+    padding: 60px 20px;
+}
+
+.container-calculadora {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.calculadora-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.calculadora-sidebar {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f8f1f5;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(145, 26, 72, 0.1);
+}
+
+.calculadora-resultado {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--vinho-intenso);
+    padding: 30px;
+    border-radius: 15px;
+    color: var(--branco-cetim);
+    display: flex;
+    flex-direction: column;
+}
+
+.calculadora-info {
+    background-color: #f8f1f5;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(145, 26, 72, 0.1);
+}
+
+.calculadora-info h3 {
+    color: var(--vinho-intenso);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.calculadora-info ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.calculadora-info li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+    color: var(--vinho-intenso);
+}
+
+.calculadora-info li:before {
+    content: "✓";
+    color: var(--rosa-vibrante);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.info-box {
+    background-color: var(--rosa-chiclete-suave);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    color: var(--vinho-intenso);
+}
+
+.info-box h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--vinho-intenso);
+}
+
+.form-select, .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus, .form-input:focus {
+    outline: none;
+    border-color: var(--rosa-doce-amora);
+    box-shadow: 0 0 0 2px rgba(216, 139, 175, 0.3);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.form-checkbox {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--rosa-doce-amora);
+}
+
+.btn-calcular {
+    background-color: var(--rosa-vibrante);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-calcular:hover {
+    background-color: var(--vinho-intenso);
+    transform: translateY(-2px);
+}
+
+.resultado-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.resultado-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.valor-total {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--rosa-vibrante);
+}
+
+.resultado-detalhes {
+    margin-bottom: 25px;
+}
+
+.detalhe-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.detalhe-item.total {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid var(--rosa-doce-amora);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.resultado-observacoes {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.resultado-observacoes h4 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.resultado-observacoes ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+}
+
+.resultado-observacoes li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.resultado-observacoes li:before {
+    content: "•";
+    color: var(--rosa-doce-amora);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.btn-solicitar {
+    background-color: var(--branco-cetim);
+    color: var(--vinho-intenso);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-solicitar:hover {
+    background-color: var(--rosa-chiclete-suave);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .calculadora-sidebar, .calculadora-resultado {
+        min-width: 100%;
+    }
+    
+    .valor-total {
+        font-size: 1.5rem;
+    }
+}
+
+
+/*******************************************************/
+
+
+/* Melhorias para telas menores (mobile first) */
+@media (max-width: 576px) {
+    .container-calculadora {
+        padding: 0 10px;
+    }
+
+    .calculadora-container {
+        flex-direction: column;
+    }
+
+    .calculadora-sidebar,
+    .calculadora-resultado {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .resultado-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .valor-total {
+        font-size: 1.3rem;
+    }
+
+    .resultado-observacoes ul {
+        font-size: 0.85rem;
+    }
+
+    .btn-calcular, .btn-solicitar {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    .form-select, .form-input {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .form-group label {
+        font-size: 0.95rem;
+    }
+
+    .checkbox-group label {
+        font-size: 0.9rem;
+    }
+
+    .titulo {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+     <header id="cabecalho">
+        <section class="cabecalhoContainer">
+            <a href="index.html"><img src="Imagens/Logo Branca.png" class="logo" alt="Logo Branca"></a>
+            <form class="pesquisar" role="search">
+                <input class="barraPesquisa" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="botaoPesquisar" type="submit">Pesquisar</button>
+            </form>
+            <a href="#usuario" class="pessoa" style="position: relative; display: inline-block;">
+                <!-- Ícone normal -->
+                <svg class="icone-normal" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1
+                    1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168
+                    1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+
+                <!-- Ícone hover -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill icone-hover" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                </svg>
+            </a>
+
+
+        </section>
+        <hr>
+        <ul id="topoHeader">
+            <li>
+                <a href="index.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+                    </svg>
+                    <h4>Início</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#catalogo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
+                    <h4>Catálogo</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#sobre">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-richtext" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                        <path d="M4.5 12.5A.5.5 0 0 1 5 12h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m0-2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m1.639-3.708 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V8.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V8s1.54-1.274 1.639-1.208M6.25 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5"/>
+                    </svg>
+                    <h4>Sobre</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#contato">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                    </svg>
+                    <h4>Contato</h4>
+                </a>
+            </li>
+            <li>
+                <a href="faq.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                    </svg>
+                    <h4>FAQ</h4>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+
+    <main>
+
+
+         
+        <div class="banner d-none d-lg-block">
+        <a href="#">
+        <img
+            src="Imagens/Não confirmado 743834/imagens/img.desktop/C&a DESKTOP.jpeg"
+             class="d-block w-100"
+             alt="Imagem destaque"
+            />
+         </a>
+        </div>
+        <div class="banner d-block d-lg-none">
+        <a href="#">
+        <img
+            src="Imagens/Não confirmado 743834/imagens/img.mobile/banner projeto final (1920 x 470 px) (430 x 470 px).png"
+             class="d-block w-100"
+             alt="Imagem destaque"
+            />
+         </a>
+        </div>
+
+        <h1 class="titulo">Orçamento</h1>
+
+        <section id="orcamento" class="py-5">
+    
+    
+    <div class="container-calculadora">
+        <div class="calculadora-container">
+            <div class="calculadora-sidebar">
+                <h3>Selecione as opções:</h3>
+                
+                <div class="form-group">
+                    <label for="tamanho">Tamanho do Painel:</label>
+                    <select id="tamanho" class="form-select">
+                        <option value="2-3">2 a 3 metros</option>
+                        <option value="3-4">3 a 4 metros</option>
+                        <option value="4-5">4 a 5 metros</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipo-arco">Tipo de Arco:</label>
+                    <select id="tipo-arco" class="form-select">
+                        <option value="desconstruido">Arco Desconstruído</option>
+                        <option value="organico">Arco Orgânico</option>
+                        <option value="nenhum">Sem Arco</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="flores">Flores:</label>
+                    <select id="flores" class="form-select">
+                        <option value="nenhuma">Sem flores</option>
+                        <option value="sugestao">Sugestão de flores (+R$300-650)</option>
+                        <option value="naturais">Flores naturais (consultar)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="doces">Doces:</label>
+                    <select id="doces" class="form-select">
+                        <option value="nenhum">Sem doces personalizados</option>
+                        <option value="personalizados">Doces personalizados (+R$100-200)</option>
+                        <option value="especiais">Doces em forminhas especiais (+R$150-300)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pessoas">Quantidade de Pessoas:</label>
+                    <input type="number" id="pessoas" class="form-input" min="10" max="200" value="25">
+                </div>
+                
+                <div class="form-group">
+                    <label for="baloes">Balões Especiais:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="metalizados" class="form-checkbox">
+                        <label for="metalizados">Metalizados (+R$50-100)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="bobbles" class="form-checkbox">
+                        <label for="bobbles">Bobbles (+R$30-60)</label>
+                    </div>
+                </div>
+                
+                <button id="calcular" class="btn-calcular">Calcular Orçamento</button>
+            </div>
+            
+            <div class="calculadora-resultado">
+                <div class="resultado-header">
+                    <h3>Resumo do Orçamento</h3>
+                    <div class="valor-total">R$ <span id="valor-total">0,00</span></div>
+                </div>
+                
+                <div class="resultado-detalhes">
+                    <div class="detalhe-item">
+                        <span>Painel (2-3m)</span>
+                        <span>R$ 1.000,00</span>
+                    </div>
+                    <div class="detalhe-item">
+                        <span>Arco Desconstruído</span>
+                        <span>Incluso</span>
+                    </div>
+                    <div class="detalhe-item">
+                        <span>Flores</span>
+                        <span>Não incluído</span>
+                    </div>
+                    <div class="detalhe-item">
+                        <span>Doces</span>
+                        <span>Não incluído</span>
+                    </div>
+                    <div class="detalhe-item">
+                        <span>Balões Especiais</span>
+                        <span>Não incluído</span>
+                    </div>
+                    <div class="detalhe-item total">
+                        <span>Total Estimado</span>
+                        <span>R$ 1.000,00</span>
+                    </div>
+                </div>
+                
+                <div class="resultado-observacoes">
+                    <h4>Observações:</h4>
+                    <ul>
+                        <li>Valores válidos para itens do nosso acervo</li>
+                        <li>Personalizações podem gerar custos adicionais</li>
+                        <li>Para valores exatos, solicite um orçamento personalizado</li>
+                    </ul>
+                </div>
+                
+                <button id="solicitar" class="btn-solicitar">Solicitar Orçamento Completo</button>
+            </div>
+        </div>
+        
+        <div class="calculadora-info">
+            <h3>O que está incluído no seu orçamento:</h3>
+            <ul>
+                <li>Painel de fundo (inteiriço ou desconstruído)</li>
+                <li>Tapete (pelo, tecido ou lona)</li>
+                <li>Mobília do nosso acervo</li>
+                <li>Suportes de doces</li>
+                <li>Personagens (conforme tema)</li>
+                <li>Objetos decorativos</li>
+                <li>Boleira</li>
+                <li>Vasos</li>
+                <li>Iluminação no painel para festas noturnas</li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>Importante!</h4>
+                <p>Para painéis inteiriços é cobrada mão de obra de colocação à parte (serviço terceirizado).</p>
+                <p>Tapetes em lona têm custo adicional de R$80,00 para colocação.</p>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <footer>
+        <section class="topoFooter">
+            <section class="chamadaFooter">
+                <img src="Imagens/Logo Branca.png" alt="" style="width: 70%;">
+                <h2>Eventos únicos, memórias eternas.</h2>
+                <p>Chantilly & Amora é especializada em transformar eventos em experiências únicas. Unimos romantismo, sofisticação e personalização para criar celebrações inesquecíveis. Cada detalhe importa — porque cada história é única.</p>
+            </section>
+            <section class="pagamentoSeguranca">
+                <div>
+                    <h3>FORMAS DE PAGAMENTO</h3>
+                    <div>
+                        <img src="https://img.icons8.com/?size=512&id=13608&format=png" alt="" class="imagemFooter" >
+                        <img src="https://images.seeklogo.com/logo-png/50/2/pix-banco-central-brasil-logo-png_seeklogo-500502.png" alt="" class="imagemFooter">
+                    </div>
+                    <div>
+                        <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="" class="imagemFooter">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Elo_card_association_logo_-_black_text.svg/2560px-Elo_card_association_logo_-_black_text.svg.png" alt="" class="imagemFooter">
+                    </div>
+                </div>
+                <div class="seguranca">
+                    <h3>SEGURANÇA</h3>
+                    <div>
+                        <img src="Imagens/C&A ÍCONES (3).png" alt="" style="width: 96%;">
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="menuFooter">
+            <a href="sobre">SOBRE NÓS |</a>
+            <a href="sobre">PORTIFÓLIO |</a>
+            <a href="sobre">SERVIÇOS |</a>
+            <a href="sobre">BLOG |</a>
+            <a href="sobre">ORÇAMENTO |</a>
+            <a href="sobre">CONTATO |</a>
+        </section>
+        <section class="infoFooter">
+            <h6>CHANTILLY & AMORA - DECORAÇÃO DE FESTAS | contato@chantillyeamora.com.br | CNPJ: 35.307.762/0001-10 | 2025</h6>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="javascript/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script type="text/javascript">
+      window.onload = function(){
+      (function(d, script) {
+      script = d.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = 'https://w.app/widget-v1/Y2g5Hp.js';
+      d.getElementsByTagName('head')[0].appendChild(script);
+      }(document));
+      };
+      </script>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Preços base conforme o PDF
+    const precos = {
+        tamanho: {
+            '2-3': { desconstruido: 1000, organico: 1200 },
+            '3-4': { desconstruido: 1200, organico: 1450 },
+            '4-5': { desconstruido: 1300, organico: 1700 }
+        },
+        flores: {
+            '2-3': 300,
+            '3-4': 450,
+            '4-5': 650
+        },
+        doces: {
+            personalizados: { '25': 100, '35': 150, '50': 200 },
+            especiais: { '25': 150, '35': 225, '50': 300 }
+        },
+        baloes: {
+            metalizados: { '2-3': 50, '3-4': 75, '4-5': 100 },
+            bobbles: { '2-3': 30, '3-4': 45, '4-5': 60 }
+        }
+    };
+
+    // Elementos do DOM
+    const tamanhoSelect = document.getElementById('tamanho');
+    const tipoArcoSelect = document.getElementById('tipo-arco');
+    const floresSelect = document.getElementById('flores');
+    const docesSelect = document.getElementById('doces');
+    const pessoasInput = document.getElementById('pessoas');
+    const metalizadosCheckbox = document.getElementById('metalizados');
+    const bobblesCheckbox = document.getElementById('bobbles');
+    const calcularBtn = document.getElementById('calcular');
+    const valorTotalSpan = document.getElementById('valor-total');
+    const detalhesContainer = document.querySelector('.resultado-detalhes');
+
+    // Calcular orçamento
+    function calcularOrcamento() {
+        const tamanho = tamanhoSelect.value;
+        const tipoArco = tipoArcoSelect.value;
+        const flores = floresSelect.value;
+        const doces = docesSelect.value;
+        const pessoas = parseInt(pessoasInput.value);
+        const metalizados = metalizadosCheckbox.checked;
+        const bobbles = bobblesCheckbox.checked;
+
+        // Calcular valor base
+        let valorBase = 0;
+        let arcoDesc = '';
+
+        if (tipoArco === 'nenhum') {
+            valorBase = precos.tamanho[tamanho].desconstruido - 200; // Desconto sem arco
+            arcoDesc = 'Sem arco';
+        } else {
+            valorBase = precos.tamanho[tamanho][tipoArco];
+            arcoDesc = tipoArco === 'desconstruido' ? 'Arco Desconstruído' : 'Arco Orgânico';
+        }
+
+        // Calcular flores
+        let valorFlores = 0;
+        let floresDesc = 'Não incluído';
+        if (flores === 'sugestao') {
+            valorFlores = precos.flores[tamanho];
+            floresDesc = `Sugestão de flores (+R$${valorFlores.toFixed(2).replace('.', ',')})`;
+        } else if (flores === 'naturais') {
+            floresDesc = 'Flores naturais (consultar)';
+        }
+
+        // Calcular doces
+        let valorDoces = 0;
+        let docesDesc = 'Não incluído';
+        let qtdDoces = pessoas <= 25 ? '25' : pessoas <= 35 ? '35' : '50';
+        
+        if (doces === 'personalizados') {
+            valorDoces = precos.doces.personalizados[qtdDoces];
+            docesDesc = `Doces personalizados (+R$${valorDoces.toFixed(2).replace('.', ',')})`;
+        } else if (doces === 'especiais') {
+            valorDoces = precos.doces.especiais[qtdDoces];
+            docesDesc = `Doces especiais (+R$${valorDoces.toFixed(2).replace('.', ',')})`;
+        }
+
+        // Calcular balões
+        let valorBaloes = 0;
+        let baloesDesc = 'Não incluído';
+        let baloesItems = [];
+        
+        if (metalizados) {
+            valorBaloes += precos.baloes.metalizados[tamanho];
+            baloesItems.push(`Metalizados (+R$${precos.baloes.metalizados[tamanho].toFixed(2).replace('.', ',')})`);
+        }
+        
+        if (bobbles) {
+            valorBaloes += precos.baloes.bobbles[tamanho];
+            baloesItems.push(`Bobbles (+R$${precos.baloes.bobbles[tamanho].toFixed(2).replace('.', ',')})`);
+        }
+        
+        if (baloesItems.length > 0) {
+            baloesDesc = baloesItems.join(', ');
+        }
+
+        // Calcular total
+        const valorTotal = valorBase + valorFlores + valorDoces + valorBaloes;
+
+        // Atualizar UI
+        valorTotalSpan.textContent = valorTotal.toFixed(2).replace('.', ',');
+        
+        // Atualizar detalhes
+        const tamanhoDesc = tamanho === '2-3' ? '2-3m' : tamanho === '3-4' ? '3-4m' : '4-5m';
+        
+        detalhesContainer.innerHTML = `
+            <div class="detalhe-item">
+                <span>Painel (${tamanhoDesc})</span>
+                <span>R$ ${valorBase.toFixed(2).replace('.', ',')}</span>
+            </div>
+            <div class="detalhe-item">
+                <span>${arcoDesc}</span>
+                <span>${tipoArco === 'nenhum' ? 'Não incluso' : 'Incluso'}</span>
+            </div>
+            <div class="detalhe-item">
+                <span>Flores</span>
+                <span>${floresDesc}</span>
+            </div>
+            <div class="detalhe-item">
+                <span>Doces</span>
+                <span>${docesDesc}</span>
+            </div>
+            <div class="detalhe-item">
+                <span>Balões Especiais</span>
+                <span>${baloesDesc}</span>
+            </div>
+            <div class="detalhe-item total">
+                <span>Total Estimado</span>
+                <span>R$ ${valorTotal.toFixed(2).replace('.', ',')}</span>
+            </div>
+        `;
+    }
+
+    // Event listeners
+    calcularBtn.addEventListener('click', calcularOrcamento);
+    
+    // Calcular ao carregar a página
+    calcularOrcamento();
+    
+    // Botão de solicitar orçamento
+    document.getElementById('solicitar').addEventListener('click', function() {
+        alert('Orçamento solicitado com sucesso! Entraremos em contato em breve para confirmar os detalhes.');
+    });
+});
+      </script>
+
+</body>
+</html>

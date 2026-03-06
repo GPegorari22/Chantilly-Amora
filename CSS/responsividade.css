@@ -1,0 +1,151 @@
+:root{
+    --rosa-chiclete-suave: #D9AFC3;
+    --rosa-doce-amora: #D88BAF;
+    --branco-cetim: #FFF9FF;
+    --rosa-vibrante: #F2567E;
+    --vinho-intenso: #911A48;
+}
+
+/* Estilo Base do Header */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--vinho-intenso);
+    padding: 15px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Container do Header */
+.cabecalhoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    height: auto;
+    width: 120px;
+}
+
+
+
+/* Pesquisa */
+.pesquisar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 20px;
+    gap: 10px;
+}
+
+.barraPesquisa {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.botaoPesquisar {
+    padding: 10px 15px;
+    background-color: var(--rosa-doce-amora);
+    color: var(--branco-cetim);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Menu */
+#topoHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 10px 0;
+}
+
+#topoHeader li a {
+    text-decoration: none;
+    color: var(--branco-cetim);
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#topoHeader li a:hover {
+    background-color: var(--rosa-vibrante);
+}
+
+/* Botão de Menu Toggle (Mobile) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: var(--branco-cetim);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+    .cardDestaque{
+        height: 40% !important;
+    }
+    .menu-toggle {
+        display: block;
+    }
+
+    #topoHeader {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        background-color: var(--vinho-intenso);
+        width: 100%;
+    }
+
+    #topoHeader.show {
+        display: flex;
+    }
+
+    .cabecalhoContainer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cardPortifolio{
+        width: 90%;
+        margin: 10px;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .cabecalhoContainer {
+        gap: 5px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .barraPesquisa {
+        max-width: 300px;
+    }
+}

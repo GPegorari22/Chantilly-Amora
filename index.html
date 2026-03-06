@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chantilly e Amora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/responsividade.css">
+</head>
+<body>
+    <header id="cabecalho">
+        <section class="cabecalhoContainer">
+            <a href="index.html"><img src="Imagens/Logo Branca.png" class="logo" alt="Logo Branca"></a>
+            <form class="pesquisar" role="search">
+                <input class="barraPesquisa" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="botaoPesquisar" type="submit">Pesquisar</button>
+            </form>
+            <a href="usuario.html" class="pessoa d-none d-lg-block" style="position: relative; display: inline-block;">
+                <!-- Ícone normal -->
+                <svg class="icone-normal" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1
+                    1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168
+                    1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+
+                <!-- Ícone hover -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill icone-hover" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                </svg>
+            </a>
+
+
+        </section>
+        <hr>
+        <button class="menu-toggle d-block d-lg-none" onclick="toggleMenu()">☰</button>
+        <ul id="topoHeader">
+            <li>
+                <a href="index.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+                    </svg>
+                    <h4>Início</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#catalogo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
+                    <h4>Catálogo</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#sobre">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-richtext" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                        <path d="M4.5 12.5A.5.5 0 0 1 5 12h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m0-2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m1.639-3.708 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V8.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V8s1.54-1.274 1.639-1.208M6.25 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5"/>
+                    </svg>
+                    <h4>Sobre</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#contato">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                    </svg>
+                    <h4>Contato</h4>
+                </a>
+            </li>
+            <li>
+                <a href="faq.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                    </svg>
+                    <h4>FAQ</h4>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <div id="carouselExampleAutoplaying" class="carousel slide banner d-none d-lg-block" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <a href="calculadora.html">
+                        <img src="Imagens/Não confirmado 743834/imagens/img.desktop/C&a DESKTOP.jpeg" alt="" class="d-block w-100">
+                    </a>
+
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="casamento.html"><img src="Imagens/Não confirmado 743834/imagens/img.desktop/C&a DESKTOP (1).png" class="d-block w-100" alt="..."></a>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="#"><img src="Imagens/Não confirmado 743834/imagens/img.desktop/C&a DESKTOP (2).png" class="d-block w-100" alt="..."></a>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="bebe.html"><img src="Imagens/Não confirmado 743834/imagens/img.desktop/C&a DESKTOP (3).png" class="d-block w-100" alt="..."></a>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="15anos.html"><img src="Imagens/Não confirmado 743834/imagens/img.desktop/C&a DESKTOP (4).png" class="d-block w-100" alt="..."></a>
+                </div>
+            </div>
+        </div>
+
+        <div id="carouselExampleAutoplaying" class="carousel slide banner d-block d-lg-none" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <a href="calculadora.html">
+                        <img src="Imagens/Não confirmado 743834/imagens/img.mobile/banner projeto final (1920 x 470 px) (430 x 470 px).png" alt="" class="d-block w-100">
+                    </a>
+
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="casamento.html"><img src="Imagens/Não confirmado 743834/imagens/img.mobile/C&a DESKTOP (430 x 470 px).png" class="d-block w-100" alt="..."></a>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="#"><img src="Imagens/Não confirmado 743834/imagens/img.mobile/C&a DESKTOP (430 x 470 px) (1).png" class="d-block w-100" alt="..."></a>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="bebe.html"><img src="Imagens/Não confirmado 743834/imagens/img.mobile/C&a DESKTOP (430 x 470 px) (2).png" class="d-block w-100" alt="..."></a>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <a href="15anos.html"><img src="Imagens/Não confirmado 743834/imagens/img.mobile/banner projeto final (1920 x 470 px) (430 x 470 px) (1).png" class="d-block w-100" alt="..."></a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <section id="inicio">
+            <h1 class="titulo">Mais Procurados</h1>
+            <section class="procuradosMae">
+                <section class="procuradosFilho">
+                    <a href="DESCARTAVEIS.HTML">
+                        <article class="cardProcurado descartaveis" data-aos="fade-right">
+                            <div class="imagensProcurados">
+                                <img src="Imagens/descartaveis/descartáveis.png" alt="">
+                                <img src="Imagens/descartaveis/descartáveis (1).png" alt="">
+                                <img src="Imagens/descartaveis/descartáveis (2).png" alt="">
+                            </div>
+                            <div class="textoProcurado">
+                                <h4>Indispensáveis para sua Festa</h4>
+                                <h1>Descartáveis</h1>
+                            </div>
+                        </article>
+                    </a>
+                    <a href="casamento.html">
+                        <article class="cardProcurado casamento" data-aos="fade-left">
+                            <div class="imagensProcurados">
+                                <img src="Imagens/casamento/casamento.png" alt="">
+                                <img src="Imagens/casamento/casamento (1).png" class="bolo" alt="">
+                                <img src="Imagens/casamento/casamento (2).png" alt="">
+                            </div>
+                            <div class="textoProcurado">
+                                <h4>Casais Apaixonados</h4>
+                                <h1>Casamento</h1>
+                            </div>
+                        </article>
+                    </a>
+                </section>
+                <section class="procuradosFilho">
+                    <a href="bebe.html">
+                        <article class="cardProcurado chaBebe" data-aos="fade-right">
+                            <div class="imagensProcurados">
+                                <img src="Imagens/bebe/bebe.png" alt="">
+                                <img src="Imagens/bebe/bebe (1).png" alt="">
+                                <img src="Imagens/bebe/bebe (2).png" alt="">
+                            </div>
+                            <div class="textoProcurado">
+                                <h4>Tudo para o seu Pequeno</h4>
+                                <h1>Chá de Bebê</h1>
+                            </article>
+                        </article>
+                    </a>
+                    <a href="15anos.html">
+                        <article class="cardProcurado quinzeAnos" data-aos="fade-left">
+                            <div class="imagensProcurados">
+                                <img src="Imagens/15anos/15anos.png" alt="" class="balao">
+                                <img src="Imagens/15anos/15anos (1).png" alt="" class="estrela">
+                                <img src="Imagens/15anos/15anos (2).png" alt="">
+                            </div>
+                            <div class="textoProcurado">
+                                <h4>Debute Luxuosamente</h4>
+                                <h1>15 anos</h1>
+                            </div>
+                        </article>
+                    </a>
+                </section>
+            </section>
+        </section>
+
+        <section id="catalogo" class="py-5" data-aos="fade-up">
+            <h1 class="titulo text-center mb-4">Catálogo</h1>
+            
+            <div class="container-fluid px-0">
+                <div class="row flex-nowrap overflow-auto py-3 scroll-horizontal" style="scrollbar-width: thin;">
+                    <!-- Item 1 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="calculadora.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/8.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Orçamento</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="bebe.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/1.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Bebê</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="infantil.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/2.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Infantil</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 4 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="jovens.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/3.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Jovens e Adultos</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 5 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="sazonais.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/4.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Sazonais</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 6 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="velas.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/5.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Velas</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 7 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="baloes.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/6.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Balões</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 8 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="festas.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/7.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Festas em geral</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Item 9 -->
+                    <div class="col-6 col-md-2 mb-3 px-2">
+                        <a href="lembrancinhas.html">
+                            <div class="text-center">
+                                <img src="Imagens/Catálogo/9.png" class="img-fluid" alt="">
+                                <p class="small mt-2">Lembrancinhas</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="destaques">
+            <article class="chamadaDestaques">
+                <h1>Novidades</h1>
+                <h4>Itens de decoração imperdíveis!</h4>
+                <a href=""><button>Aproveite</button></a>
+            </article>
+            <article class="itensDestaques">
+                <article class="cardDestaques">
+                    <img class="imagemDestaques" src="Imagens/Destaques/11.png" alt="">
+                    <h3>Doceira Redonda</h3>
+                    <hr>
+                    <div class="rating">
+                        <input value="5" name="rate" id="star5" type="radio">
+                        <label title="text" for="star5"></label>
+                        <input value="4" name="rate" id="star4" type="radio">
+                        <label title="text" for="star4"></label>
+                        <input value="3" name="rate" id="star3" type="radio" checked="">
+                        <label title="text" for="star3"></label>
+                        <input value="2" name="rate" id="star2" type="radio">
+                        <label title="text" for="star2"></label>
+                        <input value="1" name="rate" id="star1" type="radio">
+                        <label title="text" for="star1"></label>
+                    </div>
+                    <h2>R$200,00</h2>
+                    <div class="botoesCard">
+                        <div class="quantidadeDestaques">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                </svg>
+                            </a>
+                            <p>|</p>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="descricao.html">
+                                <button>Comprar</button>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <article class="cardDestaques">
+                    <img class="imagemDestaques" src="Imagens/Destaques/12.png" alt="">
+                    <h3>Arco Floral</h3>
+                    <hr>
+                    <div class="rating2">
+                        <input value="10" name="rate" id="star5" type="radio">
+                        <label title="text" for="star5"></label>
+                        <input value="9" name="rate" id="star4" type="radio">
+                        <label title="text" for="star4"></label>
+                        <input value="8" name="rate" id="star3" type="radio" checked="">
+                        <label title="text" for="star3"></label>
+                        <input value="7" name="rate" id="star2" type="radio">
+                        <label title="text" for="star2"></label>
+                        <input value="6" name="rate" id="star1" type="radio">
+                        <label title="text" for="star1"></label>
+                    </div>
+                    <h2>R$169,90</h2>
+                    <div class="botoesCard">
+                        <div class="quantidadeDestaques">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                </svg>
+                            </a>
+                            <p>|</p>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="">
+                                <button>Comprar</button>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </article>
+        </section>
+        <section id="sobre">
+            <h1 class="titulo">Sobre Nós</h1>
+            <img src="Imagens/Sobre nós/Sobre nós.png" alt="" class="bannerSobre">
+            <section class="sobreBloco">
+                <p>
+                    A Chantilly & Amora surgiu com o propósito de transformar eventos em experiências únicas, unindo sofisticação, criatividade e atenção aos detalhes.  
+                    <br>
+                    <br>
+                    Com um estilo romântico e inspirado na estética francesa, a marca se destaca pela personalização das decorações e pelo atendimento acolhedor.
+                </p>
+            </section>
+        </section>
+        <section class="galeria">
+            <video autoplay muted loop playsinline class="videoSobre">
+                <source src="video/AQM15VIPIAM8Ihgs4iNo-EcVA9NLyY_T6bo-zLLtC-t3cgnRFRcqoevsrKJjCY6HwjSZxaMFSTzZyEgj_6xQyp2mHihy_hzdixRsQ1o..mp4">
+            </video>
+            <video autoplay muted loop playsinline class="videoSobre">
+                <source src="video/AQNe-QPGhM6U4j5SzGMCgPH1r3mFHsZhQcisD3yEp-Emzb_5L-JWDq9LhE_Phk1SfDOMwJCQrMW86P6aUMdPviF323PwX-WcCIsPiOA..mp4">
+            </video>
+            <video autoplay muted loop playsinline class="videoSobre">
+                <source src="video/AQOObG9K6NDr8L9oT9t7cJUbkpnE-6O4M7LKSlJ7tJ3_eDq__jRMDihqVOr012wb7ME_farL3F2jJcQJ549odjm26ykPyMVZBmlyhkQ..mp4">
+            </video>
+            <video autoplay muted loop playsinline class="videoSobre">
+                <source src="video/AQP0SJpoQ4f7uV9bKPMx1zDpOcdsnwAItMcFy2z5YZZgjDKs7KITLAfMq5Bv_kLJwial4U3pqOGFQnz6TI_NvyxMlpsEFN5Xqemjc7U..mp4">
+            </video>
+        </section>
+
+        <section class="portifolio">
+            <h1 class="titulo">Nosso trabalho</h1>
+            <article class="portifolioContainer">
+                <div class="portifolioFilho">
+                    <div class="cardPortifolio">
+                        <img src="Imagens/Portifólio/Festas em geral.gif" alt="" class="videoPortifolio">
+                        <a href="">
+                            <p class="fg">Festas em Geral</p>
+                        </a>
+                    </div>
+                    <div class="cardPortifolio">
+                        <img src="Imagens/Portifólio/Casamento.gif" alt="" class="videoPortifolio">
+                        <a href="">
+                            <p class="c">Casamento</p>
+                        </a>
+                    </div>
+                    <div class="cardPortifolio">
+                        <img src="Imagens/Portifólio/Festa de Aniversario.gif" alt="" class="videoPortifolio">
+                        <a href="">
+                            <p class="fa">Festa de Aniversario</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="portifolioFilho">
+                    <div class="cardPortifolio">
+                        <img src="Imagens/Portifólio/Itens para a mesa.gif" alt="" class="videoPortifolio">
+                        <a href="">
+                            <p class="im">Itens para a mesa</p>
+                        </a>
+                    </div>
+                    <div class="cardPortifolio">
+                        <img src="Imagens/Portifólio/Entrega e Montagem.gif" alt="" class="videoPortifolio">
+                        <a href="">
+                            <p class="em">Entrega e Montagem</p>
+                        </a>
+                    </div>
+                    <div class="cardPortifolio">
+                        <img src="Imagens/Portifólio/15 anos.gif" alt="" class="videoPortifolio">
+                        <a href="">
+                            <p class="qa">15 anos</p>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="depoimentos">
+            <img src="Imagens/Depoimentos/2.png" alt="" style="width: 100%;">
+            <article class="depoimentosCliente">
+                <div class="testimonial active">
+                    <p class="quote">"Foi como viver um conto de fadas! Cada detalhe era mágico."</p>
+                    <p class="author">— Camila M.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"A decoração superou todas as expectativas. Foi impecável!"</p>
+                    <p class="author">— Júlia R.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"Cada convidado comentou o quanto estava tudo lindo. Gratidão!"</p>
+                    <p class="author">— Fernanda S.</p>
+                </div>
+
+                <button class="arrow left" onclick="prevTestimonial()">←</button>
+                <button class="arrow right" onclick="nextTestimonial()">→</button>
+
+                <div class="dots" id="dots">
+                    <span class="dot active" onclick="showTestimonial(0)"></span>
+                    <span class="dot" onclick="showTestimonial(1)"></span>
+                    <span class="dot" onclick="showTestimonial(2)"></span>
+                </div>
+            </article>
+            <img src="Imagens/Depoimentos/1.png" alt="" style="width: 100%;">
+        </section>
+
+        <h1 class="titulo blogTitulo">Blog</h1>
+
+        <section class="blogpc">
+            <a href="blog.html" class="col-6 col-md-3">
+            <article class="cardBlog">
+                <img src="Imagens/Blog/1.png" alt="Ideias Criativas" class="img-fluid">
+                <h2>Ideias Criativas de Decoração para Festas Econômicas</h2>
+            </article>
+        </a>
+        <a href="#" class="col-6 col-md-3">
+            <article class="cardBlog">
+                <img src="Imagens/Blog/2.png" alt="Tendências 2025" class="img-fluid">
+                <h2>Tendências de Decoração para Festas em 2025</h2>
+            </article>
+        </a>
+        <a href="#" class="col-6 col-md-3">
+            <article class="cardBlog">
+                <img src="Imagens/Blog/3.png" alt="Tema Perfeito" class="img-fluid">
+                <h2>Como Escolher o Tema Perfeito para Sua Festa</h2>
+            </article>
+        </a>
+        </section>
+
+        <!--<div class="container-fluid px-0">
+    <div class="blog row flex-nowrap overflow-auto py-3 scroll-horizontal d-block d-lg-none">
+        <a href="blog.html" class="col-6 col-md-3">
+            <article class="cardBlog">
+                <img src="Imagens/Blog/1.png" alt="Ideias Criativas" class="img-fluid">
+                <h2>Ideias Criativas de Decoração para Festas Econômicas</h2>
+            </article>
+        </a>
+        <a href="#" class="col-6 col-md-3">
+            <article class="cardBlog">
+                <img src="Imagens/Blog/2.png" alt="Tendências 2025" class="img-fluid">
+                <h2>Tendências de Decoração para Festas em 2025</h2>
+            </article>
+        </a>
+        <a href="#" class="col-6 col-md-3">
+            <article class="cardBlog">
+                <img src="Imagens/Blog/3.png" alt="Tema Perfeito" class="img-fluid">
+                <h2>Como Escolher o Tema Perfeito para Sua Festa</h2>
+            </article>
+        </a>
+    </div>
+</div>-->
+
+
+
+        <section class="newsletter" id="contato">
+            <div class="newsletter-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-envelope newsletter-icon" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                </svg>
+                <h2>Cadastre-se para ficar por dentro de todas as novidades!</h2>
+                <form class="newsletter-form">
+                <input type="email" placeholder="E-mail" required>
+                <button type="submit">Cadastre-se</button>
+                </form>
+            </div>
+        </section>
+
+
+        <section class="redesociais">
+            <h1 class="titulo">Contato</h1>
+            <h2>Nos siga nas Redes Sociais</h2>
+            <article class="links">
+                <div class="duasredes">
+                    <a href="https://www.instagram.com/chantillyamora/" target="_blank"><img src="Imagens/redes/5.png" alt=""></a>
+                    <a href="https://x.com/home" target="_blank"><img src="Imagens/redes/6.png" alt=""></a>
+                </div>
+                <div class="duasredes">
+                    <a href="https://web.facebook.com/chantillyeamora" target="_blank"><img src="Imagens/redes/7.png" alt=""></a>
+                    <a href="https://w.app/chantillyeamora" target="_blank"><img src="Imagens/redes/8.png" alt=""></a>
+                </div>
+            </article>
+            <h2 style="margin-top: 150px;" data-aos="fade-up"
+            data-aos-duration="1000">Região onde atuamos:</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29745.041049264408!2d-48.50903779677619!3d-21.266315904773737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b946a1c0645469%3A0xbbf20cec9bd2f648!2sMonte%20Alto%2C%20SP%2C%2015910-000!5e0!3m2!1spt-BR!2sbr!4v1749574845965!5m2!1spt-BR!2sbr" width="800" height="350" class="mapa" style="border:0; margin: 5px auto 10px auto; border-radius: 20px; border: 2px solid #911A48;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-aos="fade-up"
+            data-aos-duration="1000"></iframe>
+            <img src="Imagens/redes/Folha.png" class="folha" alt="">
+        </section>
+    </main>
+
+    <footer>
+        <section class="topoFooter">
+            <section class="chamadaFooter">
+                <img src="Imagens/Logo Branca.png" alt="" style="width: 70%;">
+                <h2>Eventos únicos, memórias eternas.</h2>
+                <p>Chantilly & Amora é especializada em transformar eventos em experiências únicas. Unimos romantismo, sofisticação e personalização para criar celebrações inesquecíveis. Cada detalhe importa — porque cada história é única.</p>
+            </section>
+            <section class="pagamentoSeguranca">
+                <div>
+                    <h3>FORMAS DE PAGAMENTO</h3>
+                    <div>
+                        <img src="https://img.icons8.com/?size=512&id=13608&format=png" alt="" class="imagemFooter" >
+                        <img src="https://images.seeklogo.com/logo-png/50/2/pix-banco-central-brasil-logo-png_seeklogo-500502.png" alt="" class="imagemFooter">
+                    </div>
+                    <div>
+                        <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="" class="imagemFooter">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Elo_card_association_logo_-_black_text.svg/2560px-Elo_card_association_logo_-_black_text.svg.png" alt="" class="imagemFooter">
+                    </div>
+                </div>
+                <div class="seguranca">
+                    <h3>SEGURANÇA</h3>
+                    <div>
+                        <img src="Imagens/C&A ÍCONES (3).png" alt="" style="width: 96%;">
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="menuFooter">
+            <a href="sobre">SOBRE NÓS |</a>
+            <a href="sobre">PORTIFÓLIO |</a>
+            <a href="sobre">SERVIÇOS |</a>
+            <a href="sobre">BLOG |</a>
+            <a href="sobre">ORÇAMENTO |</a>
+            <a href="sobre">CONTATO |</a>
+        </section>
+        <section class="infoFooter">
+            <h6>CHANTILLY & AMORA - DECORAÇÃO DE FESTAS | contato@chantillyeamora.com.br | CNPJ: 35.307.762/0001-10 | 2025</h6>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="javascript/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script type="text/javascript">
+      window.onload = function(){
+      (function(d, script) {
+      script = d.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = 'https://w.app/widget-v1/Y2g5Hp.js';
+      d.getElementsByTagName('head')[0].appendChild(script);
+      }(document));
+      };
+      </script>
+
+      
+</body>
+</html>
